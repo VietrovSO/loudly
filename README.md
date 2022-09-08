@@ -1,4 +1,4 @@
 # Loudly
 ## Структура бази даних
 
-![DB](/assets/images/db.png)
+![DB](/assets/images/db.jpg)
