@@ -1,4 +1,4 @@
 # Loudly
-##Структура бази даних
+## Структура бази даних
 
-!(/assets/images/db.png)
+![DB](/assets/images/db.png)
