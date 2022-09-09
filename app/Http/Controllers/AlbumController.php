@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Album;
+use Illuminate\Support\Facades\Log;
 
 class AlbumController extends Controller
 {
-    function show()
-    {
-        return view('songs/song', ['songs' => Song::all()]);
-    }
 
+    function show($id){
+        Log::info('Album id:', ['id' => $id]);
+        return view('albums/album', ['album' => Album::findOrFail($id)]);
+    }
 }
