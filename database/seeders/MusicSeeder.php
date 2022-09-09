@@ -18,10 +18,11 @@ class MusicSeeder extends Seeder
     {
         $time = Carbon::now();
         $faker = Faker::create();
-        DB::table('song')->insert([
+        DB::table('songs')->insert([
             'title' => $faker->word,
-            'author' => $faker->name,
-            'release_date' => $faker->date,
+            'album_id' => 1,
+            'author_id' => 1,
+            'genre_id' => 1,
             'created_at' => $time->toDateTimeString(),
             'updated_at' => $time->toDateTimeString()
         ]);

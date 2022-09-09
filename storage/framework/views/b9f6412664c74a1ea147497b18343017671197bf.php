@@ -74,7 +74,7 @@
     </div>
 </nav>
   
-<div class="container">
+<div class="container pt-3">
     <?php echo $__env->yieldContent('content'); ?>
 </div>
      
