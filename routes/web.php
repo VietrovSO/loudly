@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -25,6 +26,7 @@ Route::post('post-registration', [AuthController::class, 'postRegistration'])->n
 Route::get('dashboard', [AuthController::class, 'dashboard']); 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('song', [SongController::class, 'show']);
+Route::get('/album/{id}', [AlbumController::class, 'show']);
 
 Route::get('/', function () {
     $songs = DB::table('songs')->get();
