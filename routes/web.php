@@ -5,6 +5,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\AdminControllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\Auth\AuthController;
 */
 
 // Route::get('/', function () { return view('welcome'); });
+
+Route::get('admin', [AdminAuthController::class, 'index'])->name('login');
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
