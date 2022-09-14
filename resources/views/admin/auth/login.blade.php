@@ -1,74 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-</head>
-
-<body class="vertical-layout vertical-menu-modern" data-open="click" data-menu="vertical-menu-modern" data-col="" data-framework="laravel">
-    <div class="auth-wrapper auth-basic px-2">
-        <div class="auth-inner my-2">
-            <!-- Login basic -->
-            @if(\Session::get('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <div class="alert-body">
-                    {{ \Session::get('success') }}
+@extends('layout')
+  
+@section('content-fluid')
+<main class="login-form bg-admin h-screen bg-cover relative flex justify-center items-center">
+    <div class="w-min relative left-48">
+        <div class="bg-white/75 p-10">
+            <div class="card-header text-3xl font-semibold mb-6">Admin Login</div>
+            <form action="{{route('adminLoginPost')}}" method="POST">
+                @csrf
+                <div class="form-group row">
+                    <label for="email_address" class="text-sm">E-Mail</label>
+                    <div class="col-md-6">
+                        <input type="text" id="email_address" class="w-72 p-2 bg-transparent border border-2 border-black text-base mt-2" name="email" required autofocus>
+                        @if ($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
+                    </div>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-            {{ \Session::forget('success') }}
-            @if(\Session::get('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <div class="alert-body">
-                    {{ \Session::get('error') }}
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-            <div class="card mb-0">
-                <div class="card-body">
-                    <h2 class="brand-text text-primary ms-1">Admin Login</h2>
 
-                    <form class="auth-login-form mt-2" action="{{route('adminLoginPost')}}" method="post">
-                        @csrf
-                        <div class="mb-1">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="{{old('email') }}" autofocus />
-                            @if ($errors->has('email'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                            @endif
+                <div class="mt-3">
+                    <label for="password" class="text-sm">Password</label>
+                    <div class="col-md-6">
+                        <input type="password" id="password" class="w-72 p-2 bg-transparent border border-2 border-black text-base  mt-2" name="password" required>
+                        @if ($errors->has('password'))
+                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <div class="col-md-6 offset-md-4">
+                        <div class="checkbox">
+                            <label>
+                                {{-- <input type="checkbox" name="remember"> Remember Me --}}
+                            </label>
                         </div>
-
-                        <div class="mb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
-                                <a href="{{url('auth/forgot-password-basic')}}">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
-                            <div class="input-group input-group-merge form-password-toggle">
-                                <input type="password" class="form-control form-control-merge" id="password" name="password" tabindex="2" />
-                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-                            </div>
-                            @if ($errors->has('password'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100" tabindex="4">Sign in</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <!-- /Login basic -->
-        </div>
-    </div>
-</body>
 
-</html>
+                <div class="mt-6">
+                    <button type="submit" class="bg-black text-white px-6 py-3 rounded-full font-semibold">
+                        Login
+                    </button>
+                </div>
+            </form>    
+  </div>
+</main>
+@endsection
