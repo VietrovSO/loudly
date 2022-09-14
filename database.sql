@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: loudly
--- Generation Time: 2022-09-12 03:06:35.3270
+-- Generation Time: 2022-09-14 08:36:57.8460
 -- -------------------------------------------------------------
 
 
@@ -40,7 +40,7 @@ CREATE TABLE `albums` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `authors` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE `authors` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -136,10 +136,12 @@ INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `r
 (1, 'Serhii Admin', 'admin@gmail.com', NULL, '$2y$10$bSAfLQgkTRUoIEH7RfYqcOXr6rJa1S9qPzdhmL3Idrf7wCfJDhPjy', NULL, '2022-09-12 02:48:36', '2022-09-12 02:48:36');
 
 INSERT INTO `albums` (`id`, `title`, `author_id`, `release_date`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Kill ’Em All', 1, '1983-07-23', '', '2022-09-10 23:57:56', '2022-09-10 23:57:56');
+(1, 'Kill ’Em All', 1, '1983-07-23', '', '2022-09-10 23:57:56', '2022-09-10 23:57:56'),
+(2, 'Mops', 2, '1989-07-23', '', '2022-09-10 23:57:56', '2022-09-10 23:57:56');
 
 INSERT INTO `authors` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Metallica', '', '2022-09-11 00:01:37', '2022-09-11 00:01:37');
+(1, 'Metallica', '', '2022-09-11 00:01:37', '2022-09-11 00:01:37'),
+(2, 'Cocteau Twins', '', '2022-09-11 00:01:37', '2022-09-11 00:01:37');
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
