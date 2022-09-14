@@ -15,17 +15,17 @@
 
         <ul class="flex items-center ml-auto">
             <li class="nav-item mr-5">
-                <a class="nav-link" href="{{ route('adminLogout') }}">Dashboard</a>
+                <a class="nav-link" href="{{ route('adminDashboard') }}">Dashboard</a>
             </li>
             <li class="nav-item mr-5">
-                <a class="nav-link" href="{{ route('adminLogout') }}">Albums</a>
+                <a class="nav-link" href="{{ route('adminAlbums') }}">Albums</a>
             </li>
-            <li class="nav-item mr-5">
-                <a class="nav-link" href="{{ route('adminLogout') }}">Authors</a>
+            {{-- <li class="nav-item mr-5">
+                <a class="nav-link" href="{{ route('adminAuthors') }}">Authors</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('adminLogout') }}">Users</a>
-            </li>
+                <a class="nav-link" href="{{ route('adminUsers') }}">Users</a>
+            </li> --}}
         </ul>
     
         <ul class="flex items-center ml-auto">

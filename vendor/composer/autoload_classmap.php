@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Admin\\AdminAuthController' => $baseDir . '/app/Http/Controllers/Admin/AdminAuthController.php',
+    'App\\Http\\Controllers\\Admin\\AdminPagesController' => $baseDir . '/app/Http/Controllers/Admin/AdminPagesController.php',
     'App\\Http\\Controllers\\AlbumController' => $baseDir . '/app/Http/Controllers/AlbumController.php',
     'App\\Http\\Controllers\\Auth' => $baseDir . '/app/Http/Controllers/Auth.php',
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
@@ -28,6 +30,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Album' => $baseDir . '/app/Models/Album.php',
+    'App\\Models\\AlbumImage' => $baseDir . '/app/Models/AlbumImage.php',
     'App\\Models\\Author' => $baseDir . '/app/Models/Author.php',
     'App\\Models\\Genre' => $baseDir . '/app/Models/Genre.php',
     'App\\Models\\Song' => $baseDir . '/app/Models/Song.php',

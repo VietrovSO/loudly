@@ -4,7 +4,7 @@
 <div class="flex">
     <div class="container mx-auto">
         <div class="card">
-            <div class="text-2xl font-semibold">{{ __('Dashboard') }}</div>
+            <div class="text-4xl font-semibold">{{ __('Dashboard') }}</div>
                 
             <div class="card-body">
                 @if (session('success'))
