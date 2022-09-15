@@ -3,6 +3,7 @@
 <head>
     <title>Loudly</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/libs/jquery.min.js') }}"></script>
 </head>
 <body>
 
@@ -45,6 +46,10 @@
     <div class="container mx-auto pt-32">
         @yield('content')
     </div>
+@endif
+
+@hasSection('scripts')
+    @yield('scripts')
 @endif
 
 </body>

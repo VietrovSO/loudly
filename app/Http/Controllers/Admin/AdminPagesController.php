@@ -20,12 +20,24 @@ class AdminPagesController extends Controller
             $albumObj->title = $album->title;
             $albumObj->release_date = $album->release_date;
             $albumObj->description = $album->description;
+            $albumObj->id = $album->id;
             $albumObj->image = AlbumImage::find($album->image_id)->name;
             $albumObj->author = Author::find($album->author_id)->name;
             array_push($views, $albumObj);
         }
         return view('admin.pages.albums', [
             'albums' => $views
+        ]);
+    }
+
+    public function editAlbum($id) {
+        $album = Album::find($id);
+        $image = AlbumImage::find($album->image_id)->name;
+        $author = Author::find($album->author_id);
+        return view('admin.pages.albumEdit', [
+            'album' => $album,
+            'image' => $image,
+            'author' => $author
         ]);
     }
 }

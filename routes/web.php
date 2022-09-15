@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
     Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
+    Route::get('/admin/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
 
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/admin', function () {
