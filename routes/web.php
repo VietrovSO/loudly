@@ -5,6 +5,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\AlbumImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::get('/', function () {
     $songs = DB::table('songs')->get();
     return view('home/songsList', ['songs' => $songs]);
 });
+
+Route::get('/upload',[AlbumImageController::class,'create']);
+Route::post('/upload',[AlbumImageController::class,'store']);
