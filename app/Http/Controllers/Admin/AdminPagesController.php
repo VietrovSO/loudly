@@ -16,11 +16,7 @@ class AdminPagesController extends Controller
         $albums = Album::all();
         $views = [];
         foreach($albums as $album){
-            $albumObj = new stdClass();
-            $albumObj->title = $album->title;
-            $albumObj->release_date = $album->release_date;
-            $albumObj->description = $album->description;
-            $albumObj->id = $album->id;
+            $albumObj = $album;
             $albumObj->image = AlbumImage::find($album->image_id)->name;
             $albumObj->author = Author::find($album->author_id)->name;
             array_push($views, $albumObj);
@@ -39,5 +35,16 @@ class AdminPagesController extends Controller
             'image' => $image,
             'author' => $author
         ]);
+    }
+
+    public function updateAlbum(Request $request) {
+        $album = Album::find($request->id);
+        $album->title = $request->title;
+        $album->author_id = $request->author_id;
+        $album->release_date = $request->release_date;
+        $album->description = $request->description;
+        $album->image_id = 2;
+        $album->save();
+        return back();
     }
 }

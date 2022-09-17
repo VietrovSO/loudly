@@ -22,9 +22,9 @@
             <div class="grid grid-cols-4 gap-10 mt-6">
                 @foreach ($albums as $album)
                     <div class="col-span-1">
-                        <a class="album-item block overflow-hidden relative transition transform hover:scale-95 shadow-xl rounded-lg" href={{"admin/albums/" . $album->id}}>
+                        <a class="album-item block overflow-hidden relative transition transform hover:scale-95 shadow-xl rounded-lg" href={{"albums/" . $album->id}}>
                             <div class="">
-                                <img class="" src="{{ asset("albums/" . $album->image) }}"/>
+                                <img class="w-full" src="{{ asset("albums/" . $album->image) }}"/>
                             </div>
                             <div class="album-item-overlay hidden absolute top-0 left-0 h-full w-full bg-black/50">
                                 <div class="flex h-full w-full3 flex-col justify-center items-center">
@@ -33,7 +33,7 @@
                             </div>
                         </a>
                         <div class="mt-3 p-2">
-                            <a href={{"admin/albums/" . $album->id}}><p class="font-bold text-2xl"> {{ $album->title }}</p></a>
+                            <a href={{"albums/" . $album->id}}><p class="font-bold text-2xl"> {{ $album->title }}</p></a>
                             <p class="text-sm"> {{ $album->release_date }}</p> 
                             <p class="text-sm font-semibold"> {{ $album->author }}</p> 
                         </div>

@@ -12,22 +12,24 @@
              target="_blank">View in site
                 <span class="ml-2"><img class="w-5" src="{{ asset('icons/link.png') }}"/></span>
             </a>
-            <form action="#">
+            <form action="{{route('adminAlbumUpdate')}}" method="POST">
+                <input type="hidden" value="{{$album->id}}" name="id"/>
                 <div class="flex text-md flex-col">
                     <label for="title">Title:</label>
-                    <input id="title" class="mt-1 text-2xl border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album title" value="{{$album->title}}" />
+                    <input type="text" name="title" class="mt-1 text-2xl border border-black font-semibold px-5 py-2 rounded-lg focus:outline-black" placeholder="Album title" value="{{$album->title}}" />
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Author:</label>
-                    <input id="title" class="mt-1 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album author" value="{{$author->name}}"/>
+                    <input type="hidden" name="author_id" value="{{$author->id}}"/>
+                    <input id="title" name="author" class="mt-1 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album author" value="{{$author->name}}"/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Release date:</label>
-                    <input id="title" class="mt-1 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album release date" value="{{$album->release_date}}"/>
+                    <input id="title" name="release_date" class="mt-1 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album release date" value="{{$album->release_date}}"/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Description:</label>
-                    <textarea id="title" class="mt-1 resize-y max-h-40 min-h-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album description" value="{{$album->description}}"></textarea>
+                    <textarea id="title" type="text" name="description" class="mt-1 resize-y max-h-40 min-h-16 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album description">{{$album->description}}</textarea>
                 </div>
                 <button type="submit" class="inline-block bg-black text-white px-6 py-3 mt-4 rounded-full font-semibold">
                     Save
