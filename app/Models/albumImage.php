@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class albumImage extends Model
+class AlbumImage extends Model
 {
     use HasFactory;
+    public $timestamaps=false;
 }

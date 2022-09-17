@@ -7,7 +7,7 @@
             <div class="flex justify-between">
                 <div class="flex">
                     <div class="leading-none text-4xl font-semibold">{{ __('Albums') }}</div>
-                    <a href="#" class="ml-4 font-semibold text-md border border-black rounded-full flex justify-center items-center px-4">
+                    <a href="{{ route('adminCreateAlbums') }}" class="ml-4 font-semibold text-md border border-black rounded-full flex justify-center items-center px-4">
                         + Add
                     </a>
                 </div>

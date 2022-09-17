@@ -30,6 +30,18 @@ class AdminPagesController extends Controller
         ]);
     }
 
+    public function createAlbum(Request $request) {
+        $albums = new Album();
+        $albums->title = $request->title;
+        $albums->author_id = $request->author_id;
+        $albums->release_date = $request->release_date;
+        $albums->description = $request->description;
+        $albums->image_id = 5;
+        $albums->save();
+        return view('admin.pages.albumCreate', [
+        ]);
+    }
+
     public function editAlbum($id) {
         $album = Album::find($id);
         $image = AlbumImage::find($album->image_id)->name;
