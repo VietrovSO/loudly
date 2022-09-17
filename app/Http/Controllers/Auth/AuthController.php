@@ -2,12 +2,13 @@
   
 namespace App\Http\Controllers\Auth;
   
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Hash;
 use Session;
 use App\Models\User;
-use Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
   
 class AuthController extends Controller
 {
@@ -36,7 +37,7 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    public function postLogin(Request $request)
+    public function postLogin(Request $request, $needRedirect = true)
     {
         $request->validate([
             'email' => 'required',
@@ -45,11 +46,19 @@ class AuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->withSuccess('You have Successfully loggedin');
+            if ($needRedirect){
+                return redirect()->intended('dashboard')
+                ->withSuccess('You have Successfully loggedin');
+            } else {
+                Log::info('logged in admin');
+                return true;
+            }
         }
-  
-        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+        if ($needRedirect){
+            return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+        } else {
+            return false;
+        }
     }
       
     /**

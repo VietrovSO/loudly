@@ -4,7 +4,7 @@
     <h1>{{$album->title}}</h1>
 
     <p>{{$album->release_date}}</p>
-    <h1>Upload</h1>
+    <h3>{{$author->name}}</h3>
 
     <form method="POST" action="/upload" enctype="multipart/form-data">
         @csrf

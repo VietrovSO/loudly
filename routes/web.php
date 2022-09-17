@@ -5,7 +5,8 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\AlbumImageController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminPagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,20 @@ use App\Http\Controllers\AlbumImageController;
 */
 
 // Route::get('/', function () { return view('welcome'); });
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+    Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
+    Route::get('/admin/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
+
+    Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/admin', function () {
+            return view('admin/dashboard');
+        })->name('adminDashboard');
+    });
+});
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
