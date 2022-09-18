@@ -5,23 +5,32 @@
     <div class="flex">
         <div class="w-1/3">
             <p class="text-xl mb-4">Image:</p>
-                <button>
-                    <img class="w-full rounded-xl" src="{{asset('images/addImage.png')}}"/>
-                </button>
+                <label for="image" class="block relative cursor-pointer rounded-xl overflow-hidden">
+                    <div class="w-full h-96 border border-black flex justify-center items-center rounded-xl">
+                        <img class="w-24" src="{{asset('icons/add-image.png')}}"/>
+                    </div>
+                    <div class="hidden absolute top-0 left-0 h-full w-full bg-black/50">
+                        <div class="flex h-full w-full3 flex-col justify-center items-center">
+                            <img class="w-10" src="{{ asset('icons/add-image-white.png') }}"/>
+                        </div>
+                    </div>
+                </label>
+                <input type="file" name="image" class="hidden" id="image">
         </div>
         <div class="w-2/5 pl-10">
-            <a class="text-teal-700 inline-flex items-center border border-black font-semibold text-md border border-black rounded-full px-4 py-2 mb-4"
-             href=""
-             target="_blank">View in site
-                <span class="ml-2"><img class="w-5" src="{{ asset('icons/link.png') }}"/></span>
-            </a>
                 <div class="flex text-md flex-col">
                     <label for="title">Title:</label>
                     <input id="title" class="mt-1 text-2xl border border-black font-semibold px-5 py-2 rounded-lg" name="title" placeholder="Album title"/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Author:</label>
-                    <input id="title" class="mt-1 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" name="author_id" placeholder="Album author"/>
+                    <select name="author_id">
+                        <option value="new" >New Author</option>
+                        @foreach ($allAuthors as $author)
+                            <option value={{$author->id}}>{{$author->name}}</option>
+                        @endforeach
+                      </select>
+                    <input id="author-input" name="author" class="mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album author" value=""/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Release date:</label>
@@ -38,4 +47,10 @@
         </div>
     </div>
 </form>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src={{ asset('js/libs/jquery.selectric.min.js')}}></script>
+    <link rel="stylesheet" href={{ asset('js/libs/selectric.css')}}>
+    <script type="text/javascript" src={{ asset('js/admin/albums.js')}}></script>
 @endsection

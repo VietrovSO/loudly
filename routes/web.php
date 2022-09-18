@@ -23,18 +23,18 @@ use App\Http\Controllers\Admin\AdminPagesController;
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
-    Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
-    Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
-    Route::get('/albums/edit/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
 
-    Route::get('/albums/add', function(){
-        return view('admin/pages/albumCreate');
-    });
-    Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');
-    Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
-    
     Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
+        Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
+        Route::get('/albums/edit/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
+    
+        Route::get('/albums/add', [AdminPagesController::class, 'createAlbumPage'])->name('getCreateAlbums');
+        Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');
+        Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
+        Route::get('/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
+    
         Route::get('/admin', function () {
             return view('admin/dashboard');
         })->name('adminDashboard');
@@ -54,6 +54,3 @@ Route::get('/', function () {
     $songs = DB::table('songs')->get();
     return view('home/songsList', ['songs' => $songs]);
 });
-
-Route::get('/upload',[AlbumImageController::class,'create']);
-Route::post('/upload',[AlbumImageController::class,'store']);
