@@ -15,7 +15,6 @@ class AdminAuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        Log::info('111');
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
@@ -23,9 +22,7 @@ class AdminAuthController extends Controller
 
         if(auth()->guard('admin')->attempt(['email' => $request->input('email'),  'password' => $request->input('password')])){
             $user = auth()->guard('admin')->user();
-            Log::Info(print_r($user, true));
             // if($user->is_admin == 1){
-                Log::info('fuck this');
                 return redirect()->route('adminDashboard')->with('success','You are Logged in sucessfully.');
             // }
         }else {

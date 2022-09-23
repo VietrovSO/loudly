@@ -50,7 +50,6 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard')
                 ->withSuccess('You have Successfully loggedin');
             } else {
-                Log::info('logged in admin');
                 return true;
             }
         }

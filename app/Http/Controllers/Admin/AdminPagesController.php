@@ -26,6 +26,13 @@ class AdminPagesController extends Controller
         ]);
     }
 
+    public function createAlbumPage(){
+        $allAuthors = Author::all();
+        return view('admin.pages.albumCreate', [
+            'allAuthors' => $allAuthors
+        ]);
+    }
+
     public function createAlbum(Request $request) {
         $albums = new Album();
         $albums->title = $request->title;
@@ -42,10 +49,12 @@ class AdminPagesController extends Controller
         $album = Album::find($id);
         $image = AlbumImage::find($album->image_id)->name;
         $author = Author::find($album->author_id);
+        $allAuthors = Author::all();
         return view('admin.pages.albumEdit', [
             'album' => $album,
             'image' => $image,
-            'author' => $author
+            'albumAuthor' => $author,
+            'allAuthors' => $allAuthors
         ]);
     }
 
