@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');
     Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
     
+    Route::get('/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/admin', function () {
             return view('admin/dashboard');
