@@ -11,15 +11,18 @@
                         + Add
                     </a>
                 </div>
+                <form method="get" action="{{route('search')}}">
                 <div class="border border-black rounded-full px-4 flex">
-                    <input class="focus:outline-none" type="text" placeholder="Search Albums...">
-                    <button>
+                    <input class="focus:outline-none" type="text" id="s" name="s" placeholder="Search Albums...">
+                    <button type="submit">
                         <img class="w-5" src="{{ asset('icons/search.png') }}"/>
                     </button>
                 </div>
+            </form>
             </div>
 
             <div class="grid grid-cols-4 gap-10 mt-6">
+                @if($albums!=null)
                 @foreach ($albums as $album)
                     <div class="col-span-1">
                         <a class="album-item block overflow-hidden relative transition transform hover:scale-95 shadow-xl rounded-lg" href={{"albums/" . $album->id}}>
@@ -39,6 +42,9 @@
                         </div>
                     </div>
                 @endforeach
+                @else 
+                <p>There are no albums with this request</p>
+                @endif
             </div>
                 
             <div>
