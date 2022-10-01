@@ -33,15 +33,31 @@ class AdminPagesController extends Controller
         ]);
     }
 
-    public function createAlbum(Request $request) {
+    public function createAlbum(Request $request) {      
+        $allAuthors = Author::all();
+        $name = $request->file('image')->getClientOriginalName();
+
+        $request->file('image')->storeAs('public/images/albums/',$name);
+        $photo = new albumImage();
+        $photo->name = $name;
+        $photo->save();
+
+        $author = new Author();
+        $author->name = $request->author;
+        $author->description='qwrqwrq';
+        $author->save();
+
         $albums = new Album();
+        $albums->image_id = $photo->id;
+
         $albums->title = $request->title;
-        $albums->author_id = $request->author_id;
+        $albums->author_id = $author->id;
         $albums->release_date = $request->release_date;
         $albums->description = $request->description;
-        $albums->image_id = 5;
+        $albums->image_id = $photo->id;
         $albums->save();
         return view('admin.pages.albumCreate', [
+            'allAuthors' => $allAuthors
         ]);
     }
 

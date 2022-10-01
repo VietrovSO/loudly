@@ -1,22 +1,25 @@
 @extends('admin/layout')
   
+
 @section('content')
-<form action="{{ route('adminCreateAlbums') }}" method="POST">
+<form action="{{ route('adminCreateAlbums') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="flex">
         <div class="w-1/3">
             <p class="text-xl mb-4">Image:</p>
-                <label for="image" class="block relative cursor-pointer rounded-xl overflow-hidden">
+                <label for="images" class="block relative cursor-pointer rounded-xl overflow-hidden" id="images_input">
                     <div class="w-full h-96 border border-black flex justify-center items-center rounded-xl">
                         <img class="w-24" src="{{asset('icons/add-image.png')}}"/>
                     </div>
-                    <div class="hidden absolute top-0 left-0 h-full w-full bg-black/50">
+                    <div >
                         <div class="flex h-full w-full3 flex-col justify-center items-center">
                             <img class="w-10" src="{{ asset('icons/add-image-white.png') }}"/>
                         </div>
                     </div>
                 </label>
-                <input type="file" name="image" class="hidden" id="image">
-        </div>
+                <input type="file" name="image"  id="images" class="hidden">
+                <input type="submit"  name="Upload" id="images" class="hidden">
+            </div>
         <div class="w-2/5 pl-10">
                 <div class="flex text-md flex-col">
                     <label for="title">Title:</label>
@@ -53,4 +56,8 @@
     <script type="text/javascript" src={{ asset('js/libs/jquery.selectric.min.js')}}></script>
     <link rel="stylesheet" href={{ asset('js/libs/selectric.css')}}>
     <script type="text/javascript" src={{ asset('js/admin/albums.js')}}></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJ0="
+crossorigin="anonymous"></script>
+<script src="{{asset('js/imageUpload/imageUpload.js')}}" type="text/javascript"></script>
 @endsection

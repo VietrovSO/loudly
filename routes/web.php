@@ -5,6 +5,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\AlbumImageController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPagesController;
 
@@ -32,9 +33,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     
         Route::get('/albums/add', [AdminPagesController::class, 'createAlbumPage'])->name('getCreateAlbums');
         Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');
+
         Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
         Route::get('/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
-    
+        
         Route::get('/admin', function () {
             return view('admin/dashboard');
         })->name('adminDashboard');

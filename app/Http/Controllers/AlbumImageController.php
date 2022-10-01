@@ -15,13 +15,11 @@ class AlbumImageController extends Controller
     }
     public function store(Request $request)
     {
-        $size = $request->file('image')->getSize();
         $name = $request->file('image')->getClientOriginalName();
 
-        $request->file('image')->storeAs('public/images/',$name);
+        $request->file('image')->storeAs('public/images/albums/',$name);
         $photo = new albumImage();
         $photo->name = $name;
-        $photo->size = $size;
         $photo->save();
     
         return redirect()->back();
