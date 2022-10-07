@@ -26,6 +26,25 @@ class AdminPagesController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $s = $request->s;
+ 
+        $albums = Album::where('title', 'LIKE',"%{$s}%")->get();
+        
+        $views = [];
+        foreach($albums as $album){
+            $albumObj = $album;
+            $albumObj->image = AlbumImage::find($album->image_id)->name;
+            $albumObj->author = Author::find($album->author_id)->name;
+            array_push($views, $albumObj);
+        }
+        
+        return view('admin.pages.albums', [
+            'albums' => $views
+        ]);
+    }
+
     public function createAlbumPage(){
         $allAuthors = Author::all();
         return view('admin.pages.albumCreate', [
@@ -73,7 +92,7 @@ class AdminPagesController extends Controller
             'allAuthors' => $allAuthors
         ]);
     }
-
+    
     public function updateAlbum(Request $request) {
         $album = Album::find($request->id);
         $album->title = $request->title;
