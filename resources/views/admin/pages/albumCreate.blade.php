@@ -7,14 +7,10 @@
     <div class="flex">
         <div class="w-1/3">
             <p class="text-xl mb-4">Image:</p>
-                <label for="images" class="block relative cursor-pointer rounded-xl overflow-hidden" id="images_input">
-                    <div class="w-full h-96 border border-black flex justify-center items-center rounded-xl">
-                        <img class="w-24" src="{{asset('icons/add-image.png')}}"/>
-                    </div>
-                    <div >
-                        <div class="flex h-full w-full3 flex-col justify-center items-center">
-                            <img class="w-10" src="{{ asset('icons/add-image-white.png') }}"/>
-                        </div>
+                <label for="images" class="block relative cursor-pointer rounded-xl" id="images_input">
+                    <div class="w-full h-96 border border-black flex justify-center items-center rounded-xl overflow-hidden">
+                        <img class="w-24" id="icon-preview" src="{{asset('icons/add-image.png')}}"/>
+                        <img src="" class="w-full h-full hidden object-cover" id="image-preview" alt="">
                     </div>
                 </label>
                 <input type="file" name="image"  id="images" class="hidden">
@@ -56,8 +52,5 @@
     <script type="text/javascript" src={{ asset('js/libs/jquery.selectric.min.js')}}></script>
     <link rel="stylesheet" href={{ asset('js/libs/selectric.css')}}>
     <script type="text/javascript" src={{ asset('js/admin/albums.js')}}></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJ0="
-crossorigin="anonymous"></script>
-<script src="{{asset('js/imageUpload/imageUpload.js')}}" type="text/javascript"></script>
+    <script src={{asset('js/imageUpload/imageUpload.js')}} type="text/javascript"></script>
 @endsection

@@ -1,11 +1,15 @@
 const image_input = document.querySelector('#images');
 var uploaded_image = "";
 
-image_input.addEventListener("change",function(){
+image_input.addEventListener("change", function() {
     const reader = new FileReader();
-    reader.addEventListener("load",()=>{
+    const previewIcon = $('#icon-preview');
+    const previewImage = $('#image-preview');
+    reader.addEventListener("load", () => {
+        previewIcon.fadeOut(200);
+        previewImage.fadeIn(200);
         uploaded_image = reader.result;
-        document.querySelector("#images_input").style.backgroundImage=`url(${uploaded_image})`;
+        $("#image-preview").attr('src', uploaded_image);
     })
     reader.readAsDataURL(this.files[0]);
 });
