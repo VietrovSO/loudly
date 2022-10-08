@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
         Route::get('/albums/search',[AdminPagesController::class,'search'])->name('search');
         Route::get('/albums/edit/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
+        Route::get('/albums/remove/{id}', [AdminPagesController::class, 'removeAlbum'])->name('adminRemoveAlbums');
     
         Route::get('/albums/add', [AdminPagesController::class, 'createAlbumPage'])->name('getCreateAlbums');
         Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');

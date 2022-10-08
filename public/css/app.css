@@ -668,8 +668,17 @@ video {
 .h-auto {
   height: auto;
 }
+.h-72 {
+  height: 18rem;
+}
 .max-h-40 {
   max-height: 10rem;
+}
+.max-h-96 {
+  max-height: 24rem;
+}
+.max-h-72 {
+  max-height: 18rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -812,6 +821,10 @@ video {
 }
 .bg-cover {
   background-size: cover;
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .object-cover {
   -o-object-fit: cover;

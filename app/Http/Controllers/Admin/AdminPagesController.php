@@ -54,6 +54,7 @@ class AdminPagesController extends Controller
 
     public function createAlbum(Request $request) {      
         $allAuthors = Author::all();
+        $authorId = $request->author_id;
         $name = $request->file('image')->getClientOriginalName();
 
         $request->file('image')->storeAs('public/images/albums/',$name);
@@ -61,23 +62,24 @@ class AdminPagesController extends Controller
         $photo->name = $name;
         $photo->save();
 
-        $author = new Author();
-        $author->name = $request->author;
-        $author->description='qwrqwrq';
-        $author->save();
+        if ($request->author_id == 'new') { 
+            $author = new Author();
+            $author->name = $request->author;
+            $author->description='qwrqwrq';
+            $author->save();
+            $authorId = $author->id;
+        }
 
         $albums = new Album();
         $albums->image_id = $photo->id;
 
         $albums->title = $request->title;
-        $albums->author_id = $author->id;
+        $albums->author_id = $authorId;
         $albums->release_date = $request->release_date;
         $albums->description = $request->description;
         $albums->image_id = $photo->id;
         $albums->save();
-        return view('admin.pages.albumCreate', [
-            'allAuthors' => $allAuthors
-        ]);
+        return redirect()->route('adminAlbums');
     }
 
     public function editAlbum($id) {
@@ -102,5 +104,11 @@ class AdminPagesController extends Controller
         $album->image_id = 2;
         $album->save();
         return back();
+    }
+
+    public function removeAlbum($id) {
+        $album = Album::find($id);
+        $album->delete();
+        return redirect()->route('adminAlbums');
     }
 }

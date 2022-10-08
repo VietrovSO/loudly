@@ -25,12 +25,10 @@
                 @if($albums!=null)
                 @foreach ($albums as $album)
                     <div class="col-span-1">
-                        <a class="album-item block overflow-hidden relative transition transform hover:scale-95 shadow-xl rounded-lg" href={{"albums/" . $album->id}}>
-                            <div class="">       
-                                <img class="w-full" src="{{ asset('/storage/images/albums/'. $album->image) }}"/>
-                            </div>
+                        <a class="album-item block overflow-hidden h-72 relative transition transform hover:scale-95 shadow-xl rounded-lg" href={{"albums/" . $album->id}}>
+                            <img class="w-full object-cover w-full h-full" src="{{ asset('/storage/images/albums/'. $album->image) }}"/>
                             <div class="album-item-overlay hidden absolute top-0 left-0 h-full w-full bg-black/50">
-                                <div class="flex h-full w-full3 flex-col justify-center items-center">
+                                <div class="flex h-full w-full flex-col justify-center items-center">
                                     <img class="w-10" src="{{ asset('icons/edit.png') }}"/>
                                 </div>
                             </div>

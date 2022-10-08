@@ -5,7 +5,7 @@
         <div class="w-1/3">
             <p class="text-xl mb-4">Image:</p>
             <label for="image" class=" album-item block relative cursor-pointer rounded-xl overflow-hidden">
-                <img class="w-full cursor-pointer" src="{{asset("albums/" . $image)}}"/>
+                <img class="w-full cursor-pointer" src="{{asset('/storage/images/albums/' . $image)}}"/>
                 <div class="album-item-overlay hidden absolute top-0 left-0 h-full w-full bg-black/50">
                     <div class="flex h-full w-full3 flex-col justify-center items-center">
                         <img class="w-10" src="{{ asset('icons/add-image-white.png') }}"/>
@@ -21,8 +21,8 @@
                 <span class="ml-2"><img class="w-5" src="{{ asset('icons/link.png') }}"/></span>
             </a>
             <a class="text-red-700 ml-2 inline-flex items-center border border-red-700 font-semibold text-md border border-black rounded-full px-4 py-2 mb-4"
-            href=""
-            target="_blank">Remove
+            href="{{"/admin/albums/remove/" . $album->id}}">
+            Remove
                <span class="ml-2"><img class="w-5" src="{{ asset('icons/remove.png') }}"/></span>
            </a>
             <form action="{{route('adminAlbumUpdate')}}" method="POST">
