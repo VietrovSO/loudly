@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use stdClass;
+use App\Models\Song;
 use App\Models\Album;
 use App\Models\Author;
 use App\Models\AlbumImage;
@@ -28,11 +29,10 @@ class AdminPagesController extends Controller
 
     public function search(Request $request)
     {
-        $s = $request->s;
- 
-        $albums = Album::where('title', 'LIKE',"%{$s}%")->get();
-        
+        $searchPattern = $request->searchPattern;
+        $albums = Album::where('title', 'LIKE',"%{$searchPattern}%")->get();
         $views = [];
+
         foreach($albums as $album){
             $albumObj = $album;
             $albumObj->image = AlbumImage::find($album->image_id)->name;
@@ -41,7 +41,8 @@ class AdminPagesController extends Controller
         }
         
         return view('admin.pages.albums', [
-            'albums' => $views
+            'albums' => $views,
+            'search' => $searchPattern
         ]);
     }
 
@@ -52,7 +53,7 @@ class AdminPagesController extends Controller
         ]);
     }
 
-    public function createAlbum(Request $request) {      
+    public function createAlbum(Request $request) {    
         $allAuthors = Author::all();
         $authorId = $request->author_id;
         $name = $request->file('image')->getClientOriginalName();
@@ -101,7 +102,27 @@ class AdminPagesController extends Controller
         $album->author_id = $request->author_id;
         $album->release_date = $request->release_date;
         $album->description = $request->description;
-        $album->image_id = 2;
+        $imageId = $album->image_id;
+        if ($request->file('song') !== null) {
+            $name = $request->file('song')->getClientOriginalName();
+            $request->file('song')->storeAs('public/songs/albums/', $name);
+            $song = new Song();
+            $song->title = $name;
+            $song->album_id = $request->id;
+            $song->author_id = $request->author_id;
+            $song->genre_id = 2;
+            $song->save();
+        }
+        if ($request->file('image') !== null) {
+            $name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/images/albums/', $name);
+            $photo = new albumImage();
+            $photo->name = $name;
+            $photo->save();
+            $imageId = $photo->id;
+        }
+
+        $album->image_id = $imageId;
         $album->save();
         return back();
     }

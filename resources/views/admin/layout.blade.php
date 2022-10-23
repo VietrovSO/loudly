@@ -4,6 +4,7 @@
     <title>Loudly</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/libs/jquery.min.js') }}"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
 
