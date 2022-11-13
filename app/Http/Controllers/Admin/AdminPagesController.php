@@ -88,11 +88,14 @@ class AdminPagesController extends Controller
         $image = AlbumImage::find($album->image_id)->name;
         $author = Author::find($album->author_id);
         $allAuthors = Author::all();
+        $songs = Song::where('album_id', $album->album_id);
+        dd($songs);
         return view('admin.pages.albumEdit', [
             'album' => $album,
             'image' => $image,
             'albumAuthor' => $author,
-            'allAuthors' => $allAuthors
+            'allAuthors' => $allAuthors,
+            'songs' => $songs
         ]);
     }
     

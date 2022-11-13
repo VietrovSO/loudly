@@ -11,7 +11,7 @@
 </script>
 
 @section('content')
-    <form x-data="init()" x-init="init()" action="{{route('adminAlbumUpdate')}}" method="POST" enctype="multipart/form-data">
+    <form x-data="init()" x-init="initialize()" action="{{route('adminAlbumUpdate')}}" method="POST" enctype="multipart/form-data">
         <div class="flex">
             <div class="w-1/3">
                 <label for="images" class="w-96 h-96 album-item block relative cursor-pointer rounded-xl overflow-hidden">
@@ -72,6 +72,7 @@
             <label for="title">Songs:</label>
             <div class="block">
                 <input type="file" name="song" id="song">
+                <audio controls src="{{asset('/storage/images/albums/' . $songs)}}"></audio>
             </div>                
         </div>
     </form>
