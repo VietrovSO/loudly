@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AlbumImageController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPagesController;
+use App\Http\Controllers\Admin\AdminAuthorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
+        Route::get('/authors', [AdminAuthorsController::class, 'authors'])->name('adminAuthors');
+        Route::get('/authors/remove/{id}', [AdminAuthorsController::class, 'removeAuthor'])->name('adminRemoveAuthors');
+
         Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
         Route::get('/albums/search',[AdminPagesController::class,'search'])->name('search');
         Route::get('/albums/edit/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
@@ -39,7 +43,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
         Route::get('/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
         
-        Route::get('/admin', function () {
+        Route::get('/', function () {
             return view('admin/dashboard');
         })->name('adminDashboard');
     });

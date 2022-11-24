@@ -14,3 +14,13 @@ yarn-error.log
 /.idea
 /.vscode
 /storage/logs
+bootstrap/cache/packages.php
+bootstrap/cache/services.php
+storage/framework/views/935e179869ccc95ea9ef96f530d22b17749f4a8a.php
+storage/framework/views/a4debf2b91ca743d9f70edc9a65c338d2899486c.php
+storage/framework/views/b1bbbc20eff0796c9d40a8c4307b7baf81129401.php
+storage/framework/views/b9f6412664c74a1ea147497b18343017671197bf.php
+storage/framework/views/f675831e8baa3f39b17db117ca8c7ee27210a46a.php
+vendor/composer/autoload_classmap.php
+vendor/composer/autoload_psr4.php
+vendor/composer/autoload_static.php

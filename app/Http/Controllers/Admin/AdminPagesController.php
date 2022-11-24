@@ -10,17 +10,23 @@ use App\Models\AlbumImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AdminPagesController extends Controller
 {
     public function albums() {
         $albums = Album::all();
         $views = [];
-        foreach($albums as $album){
-            $albumObj = $album;
-            $albumObj->image = AlbumImage::find($album->image_id)->name;
-            $albumObj->author = Author::find($album->author_id)->name;
-            array_push($views, $albumObj);
+        if (!empty( $albums )) {
+            foreach($albums as $album){
+                $albumObj = $album;
+                if (isset(AlbumImage::find($album->image_id)->name)){
+                    $albumObj->image = AlbumImage::find($album->image_id)->name;
+                }
+                $albumObj->author = Author::find($album->author_id)->name;
+                array_push($views, $albumObj);
+            }    
         }
         return view('admin.pages.albums', [
             'albums' => $views
@@ -72,27 +78,26 @@ class AdminPagesController extends Controller
         }
 
         $albums = new Album();
-        $albums->image_id = $photo->id;
-
         $albums->title = $request->title;
         $albums->author_id = $authorId;
         $albums->release_date = $request->release_date;
         $albums->description = $request->description;
-        $albums->image_id = $photo->id;
+        $albums->image_id = $photo->image_id;
         $albums->save();
         return redirect()->route('adminAlbums');
     }
 
     public function editAlbum($id) {
         $album = Album::find($id);
-        $image = AlbumImage::find($album->image_id)->name;
+        if (isset(AlbumImage::find($album->image_id)->name)) {
+            $image = AlbumImage::find($album->image_id)->name;
+        }
         $author = Author::find($album->author_id);
         $allAuthors = Author::all();
         $songs = Song::where('album_id', $album->album_id);
-        dd($songs);
         return view('admin.pages.albumEdit', [
             'album' => $album,
-            'image' => $image,
+            'image' => $image ?? null,
             'albumAuthor' => $author,
             'allAuthors' => $allAuthors,
             'songs' => $songs
@@ -122,7 +127,7 @@ class AdminPagesController extends Controller
             $photo = new albumImage();
             $photo->name = $name;
             $photo->save();
-            $imageId = $photo->id;
+            $imageId = $photo->image_id;
         }
 
         $album->image_id = $imageId;

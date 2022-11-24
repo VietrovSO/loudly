@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Loudly</title>
+    <title>Loudly | @yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/libs/jquery.min.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -22,10 +22,10 @@
             <li class="nav-item mr-5">
                 <a class="nav-link" href="{{ route('adminAlbums') }}">Albums</a>
             </li>
-            {{-- <li class="nav-item mr-5">
+            <li class="nav-item mr-5">
                 <a class="nav-link" href="{{ route('adminAuthors') }}">Authors</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('adminUsers') }}">Users</a>
             </li> --}}
         </ul>
