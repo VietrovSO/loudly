@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\editAlbum;
 
 use App\Models\Song;
 use App\Models\Album;
+use App\Models\Genre;
 use App\Models\Author;
 use App\Models\AlbumImage;
 use Illuminate\Http\Request;
@@ -18,15 +19,18 @@ class EditAlbumController extends Controller
         }
         $author = Author::find($album->author_id);
         $allAuthors = Author::all();
+        $allGenres = Genre::all();
         $songs = Song::where('album_id', $album->album_id);
         return view('admin.pages.albumEdit', [
             'album' => $album,
             'image' => $image ?? null,
             'albumAuthor' => $author,
             'allAuthors' => $allAuthors,
-            'songs' => $songs
+            'songs' => $songs,
+            'allGenres'=>$allGenres
         ]);
     }
+   
     
     public function updateAlbumRequest(Request $request) {
         $album = Album::find($request->id);
@@ -35,6 +39,15 @@ class EditAlbumController extends Controller
         $album->release_date = $request->release_date;
         $album->description = $request->description;
         $imageId = $album->image_id;
+        if($request->genre_id == 'new')
+        {
+            $genre = new Genre();
+            $genre->title = $request->genre;
+            $genre->save();
+            $genreId = $genre->id;
+        }
+
+        $album->genre_id = $genreId;
         if ($request->file('song') !== null) {
             $name = $request->file('song')->getClientOriginalName();
             $request->file('song')->storeAs('public/songs/albums/', $name);
@@ -42,7 +55,6 @@ class EditAlbumController extends Controller
             $song->title = $name;
             $song->album_id = $request->id;
             $song->author_id = $request->author_id;
-            $song->genre_id = 2;
             $song->save();
         }
         if ($request->file('image') !== null) {
