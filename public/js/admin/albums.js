@@ -1,13 +1,13 @@
-$(document).ready(function() {
+$(document).ready(function () {
     albumsOverlay();
     selectric();
 });
 
 function albumsOverlay() {
-    $('.album-item').hover(function() {
+    $('.album-item').hover(function () {
         const currentAlbum = $(this);
         currentAlbum.children(".album-item-overlay").fadeIn(200);
-    }, function() {
+    }, function () {
         const currentAlbum = $(this);
         currentAlbum.children(".album-item-overlay").fadeOut(200);
     });
@@ -15,11 +15,12 @@ function albumsOverlay() {
 
 function selectric() {
     $('select').selectric();
-    $('select').selectric().on('change', function() {
-        if ($(this).val() === "new") {
-            $('#author-input').fadeIn(200);
+    $('select').selectric().on('change', function () {
+        const inputElement = $(this).parents(".selectric-wrapper").siblings("input");
+        if ($(this).val() === "new" && inputElement) {
+            inputElement.fadeIn(200);
         } else {
-            $('#author-input').fadeOut(200);
+            inputElement.fadeOut(200);
         }
     });
 }

@@ -6,6 +6,7 @@ use stdClass;
 use App\Models\Song;
 use App\Models\Album;
 use App\Models\Author;
+use App\Models\Genre;
 use App\Models\AlbumImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -56,6 +57,7 @@ class AdminPagesController extends Controller
     public function createAlbum(Request $request) {    
         $allAuthors = Author::all();
         $authorId = $request->author_id;
+        
         $name = $request->file('image')->getClientOriginalName();
 
         $request->file('image')->storeAs('public/images/albums/',$name);
@@ -63,10 +65,10 @@ class AdminPagesController extends Controller
         $photo->name = $name;
         $photo->save();
 
-        if ($request->author_id == 'new') { 
+        if ($authorId == 'new') { 
             $author = new Author();
             $author->name = $request->author;
-            $author->description='qwrqwrq';
+            $author->description='';
             $author->save();
             $authorId = $author->id;
         }
@@ -87,21 +89,35 @@ class AdminPagesController extends Controller
         $album = Album::find($id);
         $image = AlbumImage::find($album->image_id)->name;
         $author = Author::find($album->author_id);
+        $genre = Genre::find($album->genre_id);
         $allAuthors = Author::all();
+        $allGenres = Genre::all();
         return view('admin.pages.albumEdit', [
             'album' => $album,
             'image' => $image,
+            'genre'=>$genre,
             'albumAuthor' => $author,
-            'allAuthors' => $allAuthors
+            'allAuthors' => $allAuthors,
+            'allGenres'=>$allGenres
         ]);
     }
     
     public function updateAlbum(Request $request) {
         $album = Album::find($request->id);
+        $genreId = $request->genre_id;
         $album->title = $request->title;
         $album->author_id = $request->author_id;
         $album->release_date = $request->release_date;
         $album->description = $request->description;
+        if($request->genre_id == 'new')
+        {
+            $genre = new Genre();
+            $genre->title = $request->genre;
+            $genre->save();
+            $genreId = $genre->id;
+        }
+
+        $album->genre_id = $genreId;
         $imageId = $album->image_id;
         if ($request->file('song') !== null) {
             $name = $request->file('song')->getClientOriginalName();

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SongListController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AlbumImageController;

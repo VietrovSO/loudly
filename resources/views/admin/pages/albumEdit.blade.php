@@ -48,7 +48,7 @@
                     </div>
                     <div class="flex text-md flex-col mt-5">
                         <label for="title">Author:</label>
-                        <select name="author_id">
+                        <select name="author_id" id="author">
                             <option value="new" >New Author</option>
                             @foreach ($allAuthors as $author)
                                 <option {{$author->id == $albumAuthor->id ? "selected" : ""}} value={{$author->id}}>{{$author->name}}</option>
@@ -56,6 +56,16 @@
                         </select>
                         {{-- <input type="hidden" name="author_id" value="{{$albumAuthor->id}}"/>  --}}
                         <input id="author-input" name="author" class=" hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album author" value=""/>
+                    </div>
+                    <div class="flex text-md flex-col mt-5">
+                        <label for="title">Genre:</label>
+                        <select name="genre_id" id="genre">
+                            <option value="new" >New Genre</option>
+                            @foreach ($allGenres as $genre)
+                                <option {{$genre->id == $genre->id ? "selected" : ""}} value={{$genre->id}}>{{$genre->title}}</option>
+                            @endforeach
+                        </select>
+                        <input id="genre-input" name="genre" class=" hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album genre" value=""/>
                     </div>
                     <div class="flex text-md flex-col mt-5">
                         <label for="title">Release date:</label>
