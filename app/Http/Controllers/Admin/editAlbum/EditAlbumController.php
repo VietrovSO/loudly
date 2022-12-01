@@ -18,6 +18,7 @@ class EditAlbumController extends Controller
             $image = AlbumImage::find($album->image_id)->name;
         }
         $author = Author::find($album->author_id);
+        $genre = Author::find($album->genre_id);
         $allAuthors = Author::all();
         $allGenres = Genre::all();
         $songs = Song::where('album_id', $album->album_id);
@@ -25,6 +26,7 @@ class EditAlbumController extends Controller
             'album' => $album,
             'image' => $image ?? null,
             'albumAuthor' => $author,
+            'albumGenre' => $genre,
             'allAuthors' => $allAuthors,
             'songs' => $songs,
             'allGenres'=>$allGenres
@@ -33,13 +35,17 @@ class EditAlbumController extends Controller
    
     
     public function updateAlbumRequest(Request $request) {
-        $album = Album::find($request->id);
-        $album->title = $request->title;
-        $album->author_id = $request->author_id;
-        $album->release_date = $request->release_date;
-        $album->description = $request->description;
-        $imageId = $album->image_id;
-        if($request->genre_id == 'new')
+        $authorId = $request->author_id;
+        $genreId = $request->genre_id;
+
+        if ($authorId == 'new') { 
+            $author = new Author();
+            $author->name = $request->author;
+            $author->description='';
+            $author->save();
+            $authorId = $author->id;
+        }
+        if($genreId == 'new')
         {
             $genre = new Genre();
             $genre->title = $request->genre;
@@ -47,7 +53,6 @@ class EditAlbumController extends Controller
             $genreId = $genre->id;
         }
 
-        $album->genre_id = $genreId;
         if ($request->file('song') !== null) {
             $name = $request->file('song')->getClientOriginalName();
             $request->file('song')->storeAs('public/songs/albums/', $name);
@@ -65,6 +70,13 @@ class EditAlbumController extends Controller
             $photo->save();
             $imageId = $photo->image_id;
         }
+        $album = Album::find($request->id);
+        $album->title = $request->title;
+        $album->author_id = $authorId;
+        $album->genre_id = $genreId;
+        $album->release_date = $request->release_date;
+        $album->description = $request->description;
+        $imageId = $album->image_id;
 
         $album->image_id = $imageId;
         $album->save();

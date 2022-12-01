@@ -74,7 +74,7 @@
                     <select name="genre_id" id="genre">
                         <option value="new" >New Genre</option>
                         @foreach ($allGenres as $genre)
-                            <option {{$genre->id == $genre->id ? "selected" : ""}} value={{$genre->id}}>{{$genre->title}}</option>
+                            <option {{$genre->id == $albumGenre->id ? "selected" : ""}} value={{$genre->id}}>{{$genre->title}}</option>
                         @endforeach
                     </select>
                     <input id="genre-input" name="genre" class=" hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album genre" value=""/>
