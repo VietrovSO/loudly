@@ -24,3 +24,4 @@ storage/framework/views/f675831e8baa3f39b17db117ca8c7ee27210a46a.php
 vendor/composer/autoload_classmap.php
 vendor/composer/autoload_psr4.php
 vendor/composer/autoload_static.php
+storage/logs/laravel.log

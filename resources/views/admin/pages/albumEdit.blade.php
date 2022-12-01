@@ -98,6 +98,6 @@
 @section('scripts')
     <script type="text/javascript" src={{ asset('js/libs/jquery.selectric.min.js') }}></script>
     <link rel="stylesheet" href={{ asset('js/libs/selectric.css') }}>
-    <script type="text/javascript" src={{ asset('js/admin/albums.js') }}></script>
+    <script type="text/javascript" src={{ asset('js/admin/selectric.js') }}></script>
     <script src={{ asset('js/imageUpload/imageUpload.js') }} type="text/javascript"></script>
 @endsection

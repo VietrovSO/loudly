@@ -2,7 +2,8 @@
 @section('title', 'Albums')
 
 @section('content')
-    <div class="flex">
+    <pre id="json"></pre>
+    <div class="flex" x-data="initAlbums()" x-init="getAllAlbums()">
         <div class="container mx-auto">
             <div class="card">
                 <div class="flex justify-between">
@@ -67,4 +68,21 @@
 
     @section('scripts')
         <script type="text/javascript" src={{ asset('js/admin/albums.js') }}></script>
+        <script>
+            function initAlbums() {
+                return {
+                    getAllAlbums() {
+                        fetch('/api/albumsAPI')
+                            .then((response) => {
+                                return response.json();
+                            })
+                            .then((data) => {
+                                const parsedData = JSON.parse(data.albums);
+                                console.log(parsedData);
+                                // document.getElementById("json").innerHTML = JSON.stringify(parsedData, null, 4);
+                            });
+                    }
+                }
+            }
+        </script>
     @endsection
