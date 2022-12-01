@@ -7,8 +7,8 @@
     <div class="flex">
         <div class="w-1/3">
             <p class="text-xl mb-4">Image:</p>
-                <label for="images" class="block relative cursor-pointer rounded-xl" id="images_input">
-                    <div class="w-full h-96 border border-black flex justify-center items-center rounded-xl overflow-hidden">
+                <label for="images" class="block h-96 w-96 relative cursor-pointer rounded-xl" id="images_input">
+                    <div class="w-full h-full border border-black flex justify-center items-center rounded-xl overflow-hidden">
                         <img class="w-24" id="icon-preview" src="{{asset('icons/add-image.png')}}"/>
                         <img src="" class="w-full h-full hidden object-cover" id="image-preview" alt="">
                     </div>
@@ -54,6 +54,6 @@
 @section('scripts')
     <script type="text/javascript" src={{ asset('js/libs/jquery.selectric.min.js')}}></script>
     <link rel="stylesheet" href={{ asset('js/libs/selectric.css')}}>
-    <script type="text/javascript" src={{ asset('js/admin/albums.js')}}></script>
+    <script type="text/javascript" src={{ asset('js/admin/selectric.js')}}></script>
     <script src={{asset('js/imageUpload/imageUpload.js')}} type="text/javascript"></script>
 @endsection

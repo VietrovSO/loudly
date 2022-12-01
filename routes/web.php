@@ -9,6 +9,11 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AlbumImageController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPagesController;
+use App\Http\Controllers\Admin\AdminAuthorsController;
+use App\Http\Controllers\Admin\editAlbum\EditAlbumController;
+use App\Http\Controllers\Admin\createAlbum\CreateAlbumController;
+use App\Http\Controllers\Admin\removeAlbum\RemoveAlbumController;
+use App\Http\Controllers\Admin\searchAlbum\SearchAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +34,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
-        Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
-        Route::get('/albums/search',[AdminPagesController::class,'search'])->name('search');
-        Route::get('/albums/edit/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
-        Route::get('/albums/remove/{id}', [AdminPagesController::class, 'removeAlbum'])->name('adminRemoveAlbums');
-    
-        Route::get('/albums/add', [AdminPagesController::class, 'createAlbumPage'])->name('getCreateAlbums');
-        Route::post('/albums/add', [AdminPagesController::class, 'createAlbum'])->name('adminCreateAlbums');
+        Route::get('/authors', [AdminAuthorsController::class, 'authors'])->name('adminAuthors');
+        Route::get('/authors/remove/{id}', [AdminAuthorsController::class, 'removeAuthor'])->name('adminRemoveAuthors');
 
-        Route::post('/albums/edit', [AdminPagesController::class, 'updateAlbum'])->name('adminAlbumUpdate');
-        Route::get('/albums/{id}', [AdminPagesController::class, 'editAlbum'])->name('adminEditAlbums');
+        Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
+        Route::get('/albums/search',[SearchAlbumController::class,'searchAlbum'])->name('search');
         
-        Route::get('/admin', function () {
+        Route::get('/albums/remove/{id}', [RemoveAlbumController::class, 'removeAlbumById'])->name('adminRemoveAlbums');
+    
+        Route::get('/albums/add', [CreateAlbumController::class, 'getDataForAlbum'])->name('getCreateAlbums');
+        Route::post('/albums/add', [CreateAlbumController::class, 'createAlbumRequest'])->name('adminCreateAlbums');
+
+        Route::post('/albums/edit', [EditAlbumController::class, 'updateAlbumRequest'])->name('adminAlbumUpdate');
+        Route::get('/albums/{id}', [EditAlbumController::class, 'getDataForEditAlbum'])->name('adminEditAlbums');
+        
+        Route::get('/', function () {
             return view('admin/dashboard');
         })->name('adminDashboard');
     });

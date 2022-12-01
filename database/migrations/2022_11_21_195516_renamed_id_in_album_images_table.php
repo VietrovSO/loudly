@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlbumImagesTable extends Migration
+class RenamedIdInAlbumImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateAlbumImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('album_images', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('size');
-            $table->timestamps();
+        Schema::table('album_images', function (Blueprint $table) {
+            $table->renameColumn('id', 'album_id');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateAlbumImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('album_images');
+        Schema::table('album_images', function (Blueprint $table) {
+            $table->renameColumn('album_id', 'id');
+        });
     }
 }
