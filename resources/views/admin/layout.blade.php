@@ -11,19 +11,19 @@
 <div class="bg-neutral-900 z-10 h-24 flex items-center fixed w-full top-0">
     <div class="container text-white py-6 flex justify-between items-center mx-auto w-full">
         <div class="flex flex-col">
-            <a class="text-4xl font-semibold leading-none" href="{{ route('adminDashboard') }}"> Loudly</a>
+            <a class="text-4xl font-semibold leading-none" href="{{ route('adminAlbums') }}"> Loudly</a>
             <span class="text-base font-normal leading-none mt-1">Admin</span>
         </div>    
 
         <ul class="flex items-center ml-auto">
             <li class="nav-item mr-5">
-                <a class="nav-link" href="{{ route('adminDashboard') }}">Dashboard</a>
-            </li>
-            <li class="nav-item mr-5">
                 <a class="nav-link" href="{{ route('adminAlbums') }}">Albums</a>
             </li>
             <li class="nav-item mr-5">
                 <a class="nav-link" href="{{ route('adminAuthors') }}">Authors</a>
+            </li>
+            <li class="nav-item mr-5">
+                <a class="nav-link" href="{{ route('adminGenres') }}">Genres</a>
             </li>
             {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('adminUsers') }}">Users</a>

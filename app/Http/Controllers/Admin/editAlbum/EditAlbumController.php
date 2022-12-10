@@ -12,16 +12,18 @@ use App\Http\Controllers\Controller;
 
 class EditAlbumController extends Controller
 {
-    public function getDataForEditAlbum($id) {
+    public function getDataForEditAlbum($id)
+    {
         $album = Album::find($id);
         if (isset(AlbumImage::find($album->image_id)->name)) {
             $image = AlbumImage::find($album->image_id)->name;
         }
         $author = Author::find($album->author_id);
-        $genre = Author::find($album->genre_id);
+        $genre = Genre::find($album->genre_id);
         $allAuthors = Author::all();
         $allGenres = Genre::all();
         $songs = Song::where('album_id', $album->album_id);
+        // dd($genre);
         return view('admin.pages.albumEdit', [
             'album' => $album,
             'image' => $image ?? null,
@@ -29,24 +31,24 @@ class EditAlbumController extends Controller
             'albumGenre' => $genre,
             'allAuthors' => $allAuthors,
             'songs' => $songs,
-            'allGenres'=>$allGenres
+            'allGenres' => $allGenres
         ]);
     }
-   
-    
-    public function updateAlbumRequest(Request $request) {
+
+
+    public function updateAlbumRequest(Request $request)
+    {
         $authorId = $request->author_id;
         $genreId = $request->genre_id;
 
-        if ($authorId == 'new') { 
+        if ($authorId == 'new') {
             $author = new Author();
             $author->name = $request->author;
-            $author->description='';
+            $author->description = '';
             $author->save();
             $authorId = $author->id;
         }
-        if($genreId == 'new')
-        {
+        if ($genreId == 'new') {
             $genre = new Genre();
             $genre->title = $request->genre;
             $genre->save();
@@ -62,6 +64,10 @@ class EditAlbumController extends Controller
             $song->author_id = $request->author_id;
             $song->save();
         }
+
+        $album = Album::find($request->id);
+        $imageId = $album->image_id;
+        
         if ($request->file('image') !== null) {
             $name = $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public/images/albums/', $name);
@@ -70,13 +76,13 @@ class EditAlbumController extends Controller
             $photo->save();
             $imageId = $photo->image_id;
         }
-        $album = Album::find($request->id);
+
         $album->title = $request->title;
         $album->author_id = $authorId;
         $album->genre_id = $genreId;
         $album->release_date = $request->release_date;
         $album->description = $request->description;
-        $imageId = $album->image_id;
+        // $imageId = $album->image_id;
 
         $album->image_id = $imageId;
         $album->save();

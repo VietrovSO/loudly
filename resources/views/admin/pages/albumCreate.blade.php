@@ -24,12 +24,22 @@
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Author:</label>
                     <select name="author_id">
-                        <option value="new" >New Author</option>
+                        <option value="new">New Author</option>
                         @foreach ($allAuthors as $author)
                             <option value={{$author->id}}>{{$author->name}}</option>
                         @endforeach
                       </select>
                     <input id="author-input" name="author" class="mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album author" value=""/>
+                </div>
+                <div class="flex text-md flex-col mt-5">
+                    <label for="title">Genre:</label>
+                    <select name="genre_id" id="genre">
+                        <option value="new">New Genre</option>
+                        @foreach ($allGenres as $genre)
+                            <option value={{$genre->id}}>{{$genre->title}}</option>
+                        @endforeach
+                    </select>
+                    <input id="genre-input" name="genre" class="mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album genre" value=""/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="releaseDate">Release date:</label>
@@ -45,9 +55,9 @@
                 {{-- <p class="text-4xl">{{$album->title}}</p> --}}
         </div>
     </div>
-    <div class="block">
+    {{-- <div class="block">
         <input type="file" name="song" id="songs">
-    </div>
+    </div> --}}
 </form>
 @endsection
 

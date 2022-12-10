@@ -66,7 +66,7 @@
                     </select>
                     {{-- <input type="hidden" name="author_id" value="{{$albumAuthor->id}}"/>  --}}
                     <input id="author-input" name="author"
-                        class=" hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg"
+                        class="hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg"
                         placeholder="Album author" value="" />
                 </div>
                 <div class="flex text-md flex-col mt-5">
@@ -77,7 +77,7 @@
                             <option {{$genre->id == $albumGenre->id ? "selected" : ""}} value={{$genre->id}}>{{$genre->title}}</option>
                         @endforeach
                     </select>
-                    <input id="genre-input" name="genre" class=" hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album genre" value=""/>
+                    <input id="genre-input" name="genre" class="hidden mt-3 text-md h-auto border border-black font-semibold px-5 py-2 rounded-lg" placeholder="Album genre" value=""/>
                 </div>
                 <div class="flex text-md flex-col mt-5">
                     <label for="title">Release date:</label>
@@ -93,15 +93,15 @@
                 </div>
             </div>
         </div>
-        <div class="flex text-md flex-col mt-5">
+        {{-- <div class="flex text-md flex-col mt-5">
             <label for="title">Songs:</label>
             <div class="block">
                 <input type="file" name="song" id="song">
                 @isset($songs)
-                    {{-- <audio controls src="{{asset('/storage/images/albums/' . $songs)}}"></audio> --}}
+                    <audio controls src="{{asset('/storage/images/albums/' . $songs)}}"></audio>
                 @endisset
             </div>
-        </div>
+        </div> --}}
     </form>
 @endsection
 

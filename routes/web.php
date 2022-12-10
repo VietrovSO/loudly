@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AlbumImageController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminPagesController;
+use App\Http\Controllers\Admin\AdminGenresController;
 use App\Http\Controllers\Admin\AdminAuthorsController;
 use App\Http\Controllers\Admin\editAlbum\EditAlbumController;
 use App\Http\Controllers\Admin\createAlbum\CreateAlbumController;
@@ -35,7 +36,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
         Route::get('/authors', [AdminAuthorsController::class, 'authors'])->name('adminAuthors');
+        Route::get('/genres', [AdminGenresController::class, 'genres'])->name('adminGenres');
         Route::get('/authors/remove/{id}', [AdminAuthorsController::class, 'removeAuthor'])->name('adminRemoveAuthors');
+        Route::get('/genres/remove/{id}', [AdminGenresController::class, 'removeGenre'])->name('adminRemoveGenre');
 
         Route::get('/albums', [AdminPagesController::class, 'albums'])->name('adminAlbums');
         Route::get('/albums/search',[SearchAlbumController::class,'searchAlbum'])->name('search');
@@ -48,9 +51,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/albums/edit', [EditAlbumController::class, 'updateAlbumRequest'])->name('adminAlbumUpdate');
         Route::get('/albums/{id}', [EditAlbumController::class, 'getDataForEditAlbum'])->name('adminEditAlbums');
         
-        Route::get('/', function () {
-            return view('admin/dashboard');
-        })->name('adminDashboard');
+        Route::get('/', function () { return redirect('/admin/albums'); });
     });
 });
 
